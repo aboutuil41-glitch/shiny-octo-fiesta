@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\AccommondationForm;
+use App\Livewire\Dashboard;
+use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,4 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
+});
+        Route::get('/home', Home::class)->name('Home');
+        Route::get('/create/room', AccommondationForm::class)->name('add.Accommondation');
+});
 require __DIR__.'/auth.php';
