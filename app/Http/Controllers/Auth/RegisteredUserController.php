@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use PhpParser\Node\Expr\Assign;
+use Spatie\Permission\Commands\AssignRole;
 
 class RegisteredUserController extends Controller
 {
@@ -42,6 +44,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        $user->AssignRole('member');
 
         Auth::login($user);
 
