@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('accommodation_id')->constrained()->cascadeOnDelete();
             $table->enum('role', ['member', 'owner'])->default('member');
+            $table->timestamp('left_at')->nullable();
             $table->timestamps();
         });
     }
