@@ -11,7 +11,7 @@ class Accommodation extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'accommodation_users')
-                    ->withPivot('role')
+                    ->withPivot('role','left_at')
                     ->withTimestamps();
     }
 
