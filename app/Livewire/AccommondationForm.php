@@ -13,8 +13,18 @@ class AccommondationForm extends Component
     public $name;
     public $description;
 
+    private function userHasActiveAccommodation(): bool
+{
+    return AccommodationUser::where('user_id', auth()->id())
+        ->whereNull('left_at')
+        ->exists();
+}
+
     public function save()
     {
+        if ($this->userHasActiveAccommodation()) {
+        return redirect()->route('404-page');
+        }
         $accommodation = Accommodation::create([
         'name' => $this->name,
         'description' => $this->description,
@@ -25,6 +35,8 @@ class AccommondationForm extends Component
             'accommodation_id' => $accommodation->id,
             'role' => 'owner',
         ]);
+        
+        
 
         return redirect()->route('Home');
 
