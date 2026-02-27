@@ -27,6 +27,14 @@
                 <span class="nav-pip"></span>
             @endif
         </a>
+        <a href="{{ route('view.Accommondations') }}"
+           class="nav-item {{ request()->routeIs('view.Accommondations') ? 'active' : '' }}">
+            <i class="fa-solid fa-bed nav-icon"></i>
+            <span>Accommodations</span>
+            @if(request()->routeIs('view.Accommondations'))
+                <span class="nav-pip"></span>
+            @endif
+        </a>
 
         <a href="{{ route('add.Accommondation') }}"
            class="nav-item {{ request()->routeIs('add.Accommondation') ? 'active' : '' }}">
