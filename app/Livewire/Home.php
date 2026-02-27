@@ -6,7 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Expense;
-use App\Models\Payment;
+
 
 
 #[Layout('layouts.app')]
@@ -24,17 +24,18 @@ class Home extends Component
             ->take(10)
             ->get();
 
-        $accommodations = $user->accommodations()->withPivot('role')->get();
-
-        $expenseCount = Expense::where('paid_by', $user->id)->count();
-        $paymentCount = Payment::where('payer_id', $user->id)->count();
-        $reputation   = $expenseCount + ($paymentCount * 2);
+        $accommodation = $user->accommodations()
+        ->withPivot('role', 'left_at')
+      
+        ->wherePivotNull('left_at')
+        ->where('state', 'active')
+        ->first();
 
         return view('livewire.Frontoffice.home', [
             'totalExpenses'  => $totalExpenses,
             'expenseHistory' => $expenseHistory,
-            'accommodations' => $accommodations,
-            'reputation'     => $reputation,
+            'accommodation' => $accommodation,
+            'reputation' => $user->reputation?? 0,
         ]);
     }
 }
