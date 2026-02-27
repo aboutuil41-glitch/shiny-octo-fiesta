@@ -8,7 +8,7 @@ class AccommodationUser extends Model
 {
     protected $table = 'accommodation_users';
 
-    protected $fillable = ['user_id', 'accommodation_id', 'role'];
+    protected $fillable = ['user_id', 'accommodation_id', 'role', 'left_at'];
 
     public function user()
     {
