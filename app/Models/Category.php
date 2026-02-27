@@ -8,6 +8,8 @@ class Category extends Model
 {
     protected $fillable = ['name', 'accommodation_id'];
 
+    public $timestamps = false;
+
     public function accommodation()
     {
         return $this->belongsTo(Accommodation::class);
@@ -18,3 +20,7 @@ class Category extends Model
         return $this->hasMany(Expense::class);
     }
 }
+
+
+
+

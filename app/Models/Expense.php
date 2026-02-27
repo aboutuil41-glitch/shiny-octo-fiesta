@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
+    
     protected $fillable = ['accommodation_id', 'paid_by', 'category_id', 'title', 'amount'];
 
     protected $casts = ['amount' => 'decimal:2'];

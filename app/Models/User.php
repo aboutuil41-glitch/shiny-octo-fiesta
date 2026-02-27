@@ -53,7 +53,7 @@ class User extends Authenticatable
     public function accommodations()
     {
         return $this->belongsToMany(Accommodation::class, 'accommodation_users')
-                    ->withPivot('role')
+                    ->withPivot('role','left_at')
                     ->withTimestamps();
     }
 
@@ -70,5 +70,10 @@ class User extends Authenticatable
     public function paymentsReceived()
     {
         return $this->hasMany(Payment::class, 'receiver_id');
+    }
+
+    public function isBanned(): bool
+    {
+        return $this->is_banned !== null;
     }
 }
